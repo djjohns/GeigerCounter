@@ -1,7 +1,7 @@
 # GeigerCounter
 
 Quick and dirty dashboard for the 
-[GQ GMC-SE Geiger Counter](https://www.gqelectronicsllc.com/comersus/store/comersus_viewItem.asp?idProduct=5845) using Streamlit, pandas, plotly, and pygmc. 
+[GQ GMC-SE Geiger Counter](https://www.gqelectronicsllc.com/comersus/store/comersus_viewItem.asp?idProduct=5845) using [Streamlit](https://docs.streamlit.io/), [pandas](https://pandas.pydata.org/docs/), [plotly](https://plotly.com/python/), and [pygmc](https://github.com/Wikilicious/pygmc). 
 
 ![Screenshot of GQ GMC-SE Dashboard](./img/Screenshot1.png)
 ![Screenshot of GQ GMC-SE Dashboard](./img/Screenshot2.png)
