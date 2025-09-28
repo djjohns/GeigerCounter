@@ -11,8 +11,8 @@ def get_device_log(base_filename="GMC-SE", data_dir="./data/") -> None:
 
     data_dir (str): Optional, path to where we write the file. Default: ``./data/``
     """
-    # gc = pygmc.GMCSE(port="COM3")
-    gc = pygmc.connect()
+    gc = pygmc.GMCSE(port="COM3")
+    # gc = pygmc.connect()  # More generic, loses reference in IDE.
 
     gc.get_version()
     gc.get_serial()

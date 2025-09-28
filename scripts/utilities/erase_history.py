@@ -18,6 +18,7 @@ def erase_history() -> None:
     ```
     """
     gc = pygmc.GMCSE(port="COM3")
+    # gc = pygmc.connect()  # More generic, loses reference in IDE.
 
     gc.get_version()
     gc.get_serial()

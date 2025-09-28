@@ -10,7 +10,7 @@ def get_history_df() -> pd.DataFrame:
     df (DataFrame): Columns: "datetime", "count", "unit", "mode", "reference_datetime", "notes"
     """
     gc = pygmc.GMCSE(port="COM3")
-    # gc = pygmc.connect()
+    # gc = pygmc.connect()  # More generic, loses reference in IDE.
 
     gc.get_version()
     gc.get_serial()

@@ -5,6 +5,7 @@ from typing import Any
 def device_info() -> dict[str, dict[str, Any]]:
     """Returns a dictionary of device info."""
     gc = pygmc.GMCSE(port="COM3")
+    # gc = pygmc.connect()  # More generic, loses reference in IDE.
 
     conn_details = gc.get_connection_details()
 

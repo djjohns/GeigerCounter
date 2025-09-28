@@ -3,6 +3,7 @@ import pygmc
 
 def get_history_length():
     gc = pygmc.GMCSE(port="COM3")
+    # gc = pygmc.connect()  # More generic, loses reference in IDE.
 
     gc.get_version()
     gc.get_serial()
