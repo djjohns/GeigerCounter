@@ -11,7 +11,7 @@ from streamlit_autorefresh import st_autorefresh
 DEFAULT_CONV = 0.0065  # µSv/hr per CPM (adjust if you've calibrated)
 PAGE_BG = "#0f172a"
 
-st.set_page_config(page_title="GQ GMC-SE Dashboard", layout="wide")
+st.set_page_config(page_title="GQ GMC-SE Dashboard", page_icon="☢️", layout="wide")
 
 
 # --------------------------
@@ -244,7 +244,7 @@ else:
 # --------------------------
 # Main
 # --------------------------
-st.title("GQ GMC-SE Radiation Dashboard")
+st.title("☢️GQ GMC-SE Radiation Dashboard☢️")
 
 df = pd.DataFrame()
 info = None
