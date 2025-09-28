@@ -1,7 +1,10 @@
 import pygmc
 
 
-def get_history_length():
+def get_history_length() -> int:
+    """
+    Returns the current row count of the device's history log.
+    """
     gc = pygmc.GMCSE(port="COM3")
     # gc = pygmc.connect()  # More generic, loses reference in IDE.
 
