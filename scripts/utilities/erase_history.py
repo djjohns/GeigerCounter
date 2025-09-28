@@ -1,6 +1,6 @@
 import pygmc
 from time import sleep
-from get_history_length import get_history_length
+from . import get_history_length
 
 
 def erase_history():
