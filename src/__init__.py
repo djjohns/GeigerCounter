@@ -19,6 +19,16 @@ from .data_prep import (
 
 from .plots import fig_time_series, fig_cpm_distribution
 
+from .backend import (
+    get_db_url,
+    get_engine,
+    safe_ident,
+    quote_table,
+    db_min_max,
+    db_distinct_notes,
+    db_fetch_slice,
+)
+
 
 __all__ = [
     "device_info",
@@ -37,4 +47,12 @@ __all__ = [
     # plots
     "fig_time_series",
     "fig_cpm_distribution",
+    # backend
+    "get_db_url",
+    "get_engine",
+    "safe_ident",
+    "quote_table",
+    "db_min_max",
+    "db_distinct_notes",
+    "db_fetch_slice",
 ]
