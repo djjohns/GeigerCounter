@@ -1,10 +1,40 @@
 services:
-  streamlit-app:
-    build: .
-    ports:
-      - "8501:8501"
+  db:
+    image: postgres:16-alpine
     env_file:
       - .env
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      # auto-init schema/table
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - "${PGPORT:-5432}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  gmc-dashboard:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+      TZ: ${TZ:-America/Chicago}
+      GMC_TABLE: ${GMC_TABLE:-public.gmc_readings}
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./data:/data:rw   # for "Read from file path (Live)"
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8501/"]
+      interval: 20s
+      timeout: 3s
+      retries: 5
+
+volumes:
+  pgdata:
