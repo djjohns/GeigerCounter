@@ -72,7 +72,7 @@ else:
     # MARK: Postgres controls
     st.sidebar.text_input(
         "DB URL (optional; else uses env)",
-        value=os.getenv("DATABASE_URL", ""),
+        value="DATABASE_URL",
         key="dburl_display",
     )
 
