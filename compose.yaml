@@ -2,11 +2,15 @@ services:
   db:
     image: postgres:16-alpine
     env_file:
-      - .env
+      - db.env
     volumes:
       - pgdata:/var/lib/postgresql/data
-      # auto-init schema/table
-      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      # Init DDL
+      - ./db/init.sql:/docker-entrypoint-initdb.d/01_init.sql:ro
+      # CSV loader (runs after init.sql)
+      - ./db/02_load_csv.sh:/docker-entrypoint-initdb.d/02_load_csv.sh:ro
+      # CSV files to import
+      - ./data:/docker-entrypoint-initdb.d/seed:ro
     ports:
       - "${PGPORT:-5432}:5432"
     healthcheck:
