@@ -128,6 +128,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
+db.env
 .env
 .venv
 env/
@@ -186,3 +187,5 @@ cython_debug/
 
 # VS Code
 .vscode
+
+/local
