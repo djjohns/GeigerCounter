@@ -1,12 +1,58 @@
 # GeigerCounter
 
 Quick and dirty dashboard for the 
-[GQ GMC-SE Geiger Counter](https://www.gqelectronicsllc.com/comersus/store/comersus_viewItem.asp?idProduct=5845) using [Streamlit](https://docs.streamlit.io/), [pandas](https://pandas.pydata.org/docs/), [plotly](https://plotly.com/python/), [pygmc](https://github.com/Wikilicious/pygmc), and [schedule](https://pypi.org/project/schedule/). 
+[GQ GMC-SE Geiger Counter](https://www.gqelectronicsllc.com/comersus/store/comersus_viewItem.asp?idProduct=5845) using [Streamlit](https://docs.streamlit.io/), [pandas](https://pandas.pydata.org/docs/), [plotly](https://plotly.com/python/), [pygmc](https://github.com/Wikilicious/pygmc), [schedule](https://pypi.org/project/schedule/), [Postgres](https://pypi.org/project/psycopg2-binary/), and [docker](https://www.docker.com/). 
 
 ![Screenshot of GQ GMC-SE Dashboard](./img/Screenshot1.png)
 ![Screenshot of GQ GMC-SE Dashboard](./img/Screenshot2.png)
 
-To use this dashboard
+## Dockerized
+
+This app has now been dockerized.
+
+You will need to create two env files.
+
+**NOTE:** Make sure you change the change the user name and password in the env 
+files!
+
+Create your .env file in the root directory of the project.
+```
+# .env
+
+ # --- App DB connection (gmc-dashboard) ---
+PGHOST=db            # service name in compose network
+PGPORT=5432
+PGDATABASE=gmc
+PGUSER=gmc
+PGPASSWORD=CHANGE_ME
+DATABASE_URL=postgresql+psycopg2://gmc:CHANGE_ME@db:5432/gmc
+
+# App settings
+GMC_TABLE=public.gmc_readings
+TZ=America/Chicago
+```
+Create your db.env file in the root directory of the project.
+```
+# db.env
+
+# --- Postgres container (db) ---
+POSTGRES_DB=gmc
+POSTGRES_USER=gmc
+POSTGRES_PASSWORD=CHANGE_ME
+CSV_DIR=/docker-entrypoint-initdb.d/seed
+GMC_TABLE=public.gmc_readings
+```
+
+Now that the env files have been created you can run the command:
+```bash
+docker-compose up --build
+```
+
+This will build and run the containers required for this app.
+
+**Note:** If you have some csv files to preload the database you can drop them in the ``/data/`` directory and they will be picked up and loaded to the Postgres db after the ``init.sql`` script runs when the Postgres container and volume are built in the docker compose process.
+
+## To use this dashboard locally
 
 Clone the repo:
 ```bash
